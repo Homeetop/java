@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>TOPSOFT BVS - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link th:href="@{/assets2/img/favicon.png}" rel="icon">
+  <link th:href="@{assets2/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link th:href="@{/assets2/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/assets2/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{/assets2/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+  <link th:href="@{/assets2/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+  <link th:href="@{/assets2/vendor/remixicon/remixicon.css}" rel="stylesheet">
+  <link th:href="@{/assets2/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+  
+  <!-- Template Main CSS File -->
+  <link th:href="@{/assets2/css/style.css}" rel="stylesheet">
+  <link th:href="@{/assets/css/ballot.css}" rel="stylesheet">
+  
+  
+
+</head>
+
+<body>
+
+ <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top " style="background: rgba(40, 40, 40, 0.9);">
+    <div class="container-fluid">
+
+      <div class="row justify-content-center">
+        <div class="col-xl-9 d-flex align-items-center justify-content-lg-between">
+          <h1 class="logo me-auto me-lg-0"><a href="index.html">
+            <i class="bi bi-person-fill">  </i>BVS</a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a class="nav-link scrollto active" href="user-dashboard.html">Home</a></li>
+                <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Elections</a>
+                     <ul class="dropdown-menu"th:each="election: ${elections}">
+                     	<span th:switch="${election.post}">
+                        <li th:case="presidency"><a class="dropdown-item"  th:href="@{'/user/ballot/'+${election.post}}">Presidency</a></li>
+                         <li th:case ="senate"><a class="dropdown-item" th:href="@{'/user/ballot/'+${election.post}}">Senate</a></li>
+                          <li th:case="Rep"><a class="dropdown-item" th:href="@{'/user/ballot/'+${election.post}}">House of Rep</a></li>
+                         <li class="dropdown-divider"></li>
+                         <li th:case ="governor"><a class="dropdown-item" th:href="@{'/user/ballot/'+${election.post}}">Govenorship</a></li>
+                         <li th:case ="hoassembly"><a class="dropdown-item" th:href="@{'/user/ballot/'+${election.post}}">House of Assembly</a></li>
+                         </span>
+                     </ul>
+                 </li>
+                 <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Results</a>
+                      <ul class="dropdown-menu"th:each="election: ${elections}">
+                          <li><a class="dropdown-item" href="#" th:text="${election.post}">Presidency</a></li>
+                        
+                      </ul>
+                  </li>
+             </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+          <a href="login.html" class="get-started ml-3 mr-0" id="logout">Welcome <span th:text ="${citizen.username}"></span></a>
+            <div class = "logo-image ml-0">
+            	
+        		<img th:src="${'/user/citizenImages/'+citizen.id}" style ="height:50px; width:50px;" class ="image-fluid float-end rounded-circle" alt="...">
+       		 </div>
+        </div>
+            
+      </div>
+
+    </div>
+  </header><!-- End Header -->
+  <main id="main">
+
+    <!-- ======= Login Section ======= -->
+    <section  class="ballot">
+    <form method="post" th:action="@{/user/ballot/__${election.postName}__}" th:object="${vote}" >
+      <div class="container">
+        <div class="row d-flex justify-content-center">
+          <div class ="col-sm-4"style="padding-top: 40px;">
+            <div class="card" style ="background-color:#aef5e7;">
+              <div class="card-header">
+                <div class ="row mt-n3 mb-2" style ="background-color:#089679;">
+                  .
+                </div>
+                <div class ="row d-flex justify-content-center">
+                  <div class ="col-2">  <img th:src="@{/assets/images/ballot/flag.PNG}" class="img-fluid rounded-start " style="height: 30px;"
+                    alt="...">
+                  </div>
+                </div>
+
+                  <div class ="row d-flex justify-content-center mt-3">
+                    <h5 class ="h5 text-center fw-bold" style="font-size:14px;">Federal Republic of Nigeria</h5>
+                  </div>
+
+                <div class ="row">
+                  <div class ="col-3">
+                      <img th:src="@{/assets/images/ballot/coatOfArm.PNG}" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class ="col-6"  >
+                      <h5 class ="h5 text-center fw-bold" style="font-size:14px;">Federal Election 2021</h5>
+                      <h4 class ="h5 text-center fw-bold" style="font-size:14px;" th:text ="${election.postName}+' ELECTION'">SENATE ELECTION</h4>
+                      <h3 class ="display-6 text-center fw-bolder" style="font-size:18px;">E-BALLOT</h3>
+                      <hr>
+                  </div>
+                  <div class ="col-3">
+                      <img th:src="@{/assets/images/ballot/inec logo.PNG}" class="img-fluid rounded-start" alt="...">
+                  </div>
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                  <div class="col-4" style="background-color: #fff; color:red;">
+                    <p class ="text-center fw-bold m-1"style="font-size:14px;" th:text="${citizen.delim.state}">OSUN STATE</p>
+                  </div>
+                </div>
+                <div class ="row d-flex mt-1 mb-2" style ="background-color:#089679;">
+                          <p class ="text-center  m-1" style ="color:#fff;font-size:11px;">Click the Candidate of your choice and click cast vote to vote</p>
+                </div>
+              </div>
+			
+                  <div class="row mx-3 mt-3 d-flex justify-content-center"style="background-color: #defff8; ">
+                    <ul class="row list-unstyled" th:each ="candidate:${election.post.cands}">
+
+                    <li class="col-12 my-2">
+                        <div class="card mb-3 cand-card" id="cand-card">
+                          <div class="row g-0">
+                            <div class="col 4 d-flex align-self-stretch">
+                              <img th:src="${'/user/candImages/'+candidate.id}" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-4 d-flex align-self-stretch">
+                              <img th:src="${'/user/partyImages/'+candidate.party.id}" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-4 d-flex align-self-stretch">
+                              <div class="card-body">
+
+                                
+	                                <div class ="d-flex justify-content-center"><input class="form-check-input" type="radio" th:field="*{candidateId}" th:value="${candidate.id}"  name="partyCard" id="partyCard"></div>
+	                                
+	                               	<p class="card-text">Party</p>
+	                               	
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+
+                      
+                    </ul>
+                  </div>
+                
+              </div>
+                    </form>
+
+              <div class ="card-footer d-flex justify-content-center" style ="background-color:#089679;">
+                <button class="btn btn-success" style="border: 1px solid #fff;">Cast vote</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    
+
+    </section><!-- End ballot Section -->
+  </main>
+
+
+ 
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  
+  <script th:inline="javascript">
+		/*<![CDATA[*/
+    
+
+   		var electionId = /*[[${election.id}]]*/ null;
+		var citizenId = /*[[${citizen.id}]]*/ null;
+		alert(citizenId);
+    
+		/*]]>*/
+		var elec = document.getElementById("elec");
+		var citi = document.getElemenetById("citizen");
+		elec.defaultValue=electionId;
+		citi.defaultValue=citizenId;
+		alert(citi.defaultValue);
+		
+</script>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
+  <script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets2/vendor/glightbox/js/glightbox.min.js}"></script>
+  <script th:src="@{/assets2/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+  <script th:src="@{/assets2/vendor/php-email-form/validate.js}"></script>
+  <script th:src="@{/assets2/vendor/purecounter/purecounter.js}"></script>
+  <script th:src="@{/assets2/vendor/swiper/swiper-bundle.min.js}"></script>
+
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets2/js/main.js}"></script>
+  <script th:src="@{/assets/js/ballot.js}"></script>
+
+</body>
+
+</html>
